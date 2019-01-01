@@ -33,12 +33,18 @@ document.addEventListener("DOMContentLoaded", function () {
         "#0028B2",
         "#FFFFFF",
         "#AAB291",
-        "#FFD619"
+        "#FFD619",
+        '#9B9AFF',
+        '#FF7E19',
+        '#FFFF19',
+        '#B2585C',
+        '#0A00B2',
+        '#FF199D'
     ];
 
     let history = [];
 
-    let BG_USED = new Array(10);
+    let BG_USED = new Array(BACKGROUNDS.length);
     for(let i=0; i<BG_USED.length; i++)
         BG_USED[i] = 0;
 
@@ -72,10 +78,11 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("error").style.display = 'none';
         let title = document.getElementById("course-title").value;
         let classroom = document.getElementById("classroom").value;
+        let section = document.getElementById("section").value;
         let days = $("#days").select2('val');
         let hours = $("#hours").select2('val');
 
-        if(title && days && hours) {
+        if(title && days && hours && section) {
             let random = Math.floor(Math.random() * (BACKGROUNDS.length));
             while(BG_USED[random]) {
                 random = Math.floor(Math.random() * (BACKGROUNDS.length));
@@ -90,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let hour = Number(hours[j]);
                     
                     arr.push(hour*8 + day);
-                    cells[hour*8 + day].innerHTML = `${title}<br>${classroom}`;
+                    cells[hour*8 + day].innerHTML = `<strong>${title}</strong>${section}<br>${classroom}`;
                     cells[hour*8 + day].style.background = BACKGROUNDS[random] + BG_OPACITY.toString();
                 }
             }
@@ -102,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.getElementById("course-title").value = '';
             document.getElementById("classroom").value = '';
+            document.getElementById("section").value = '';
             $("#days").val('').trigger('change');
             $("#hours").val('').trigger('change');
         } else {
