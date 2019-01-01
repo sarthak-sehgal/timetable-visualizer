@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BITS TimeTable Visualizer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="container">
+        <span id="title">BITS Time &dash; Table Visualizer</span>
+        <div id="input-container">
+            <div class="input-box">
+                <label>Course title:</label>
+                <input type="text" id="course-title" />
+            </div>
+            <div class="input-box">
+                <label>Classroom:</label>
+                <input type="text" id="classroom" />
+            </div>
+            <div class="input-box">
+                <label>Select days:</label>
+                <select id="days" name="days[]" multiple="multiple">
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label>Select hours:</label>
+                <select id="hours" name="hours[]" multiple="multiple">
+                    <option value="1">1: 8:00 - 9:00</option>
+                    <option value="2">2: 9:00 - 10:00</option>
+                    <option value="3">3: 10:00 - 11:00</option>
+                    <option value="4">4: 11:00 - 12:00</option>
+                    <option value="5">5: 12:00 - 13:00</option>
+                    <option value="6">6: 13:00 - 14:00</option>
+                    <option value="7">7: 14:00 - 15:00</option>
+                    <option value="8">8: 15:00 - 16:00</option>
+                    <option value="9">9: 16:00 - 17:00</option>
+                    <option value="10">10: 17:00 - 18:00</option>
+                    <option value="11">11: 18:00 - 19:00</option>
+                </select>
+            </div>
+            <button id="add-btn">Add</button>
+        </div>
+        <div id="timetable">
+
+        </div>
+        <div id="error">
+
+        </div>
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
