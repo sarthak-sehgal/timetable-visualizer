@@ -36,6 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
         "#FFD619"
     ];
 
+    let history = [];
+
     let BG_USED = new Array(10);
     for(let i=0; i<BG_USED.length; i++)
         BG_USED[i] = 0;
@@ -43,10 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const BG_OPACITY = 60;
 
     let timetable = document.getElementById("timetable");
-    let arr = new Array(12);
-    for (let i=0; i<arr.length; i++) {
-        arr[i] = new Array(8);
-    }
+    
     for(let i=0; i<12; i++) {
         let div = document.createElement("div");
         div.classList.add("row");
@@ -83,15 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             BG_USED[random] = 1;
 
+            let arr = [];
+
             for(let j=0; j<hours.length; j++) {
                 for(let i=0; i<days.length; i++) {
                     let day = Number(days[i]);
                     let hour = Number(hours[j]);
                     
+                    arr.push(hour*8 + day);
                     cells[hour*8 + day].innerHTML = `${title}<br>${classroom}`;
                     cells[hour*8 + day].style.background = BACKGROUNDS[random] + BG_OPACITY.toString();
                 }
             }
+
+            history.push({
+                bgColorIndex: random,
+                arr
+            });
 
             document.getElementById("course-title").value = '';
             document.getElementById("classroom").value = '';
@@ -99,6 +106,25 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#hours").val('').trigger('change');
         } else {
             document.getElementById("error").innerHTML = 'One or more fields missing!';
+            document.getElementById("error").style.display = 'flex';
+        }
+    });
+
+
+    let undoBtn = document.getElementById("undo-btn");
+    undoBtn.addEventListener("click", function () {
+        document.getElementById("error").style.display = 'none';
+        if(history.length >= 1) {
+            let lastMove = history[history.length - 1].arr;
+            for(let i=0; i<lastMove.length; i++) {
+                cells[lastMove[i]].innerHTML = '';
+                cells[lastMove[i]].style.background = '';
+            }
+            BG_USED[history[history.length - 1].bgColorIndex] = 0;
+            
+            history.pop();
+        } else {
+            document.getElementById("error").innerHTML = 'No history found!';
             document.getElementById("error").style.display = 'flex';
         }
     });

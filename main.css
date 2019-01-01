@@ -70,7 +70,11 @@ html, body {
     text-align: left
 }
 
-#add-btn {
+#buttons {
+    display: flex;
+}
+
+#add-btn, #undo-btn {
     background: #4BB543;
     color: #fff;
     cursor: pointer;
@@ -80,17 +84,26 @@ html, body {
     border-radius: 3px;
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
+    margin: 0 10px;
 }
 
-#add-btn:focus, #add-btn:active {
+#undo-btn {
+    background: #eea236;
+}
+
+#add-btn:focus, #add-btn:active, #undo-btn:focus, #undo-btn:active {
     outline: none;
     border: none;    
 }
 
-#add-btn:hover {
+#add-btn:hover, #undo-btn:hover {
     outline: none;
     border: none;
     background: rgb(45, 121, 40);
+}
+
+#undo-btn:hover {
+    background: #cc892c;
 }
 
 #timetable {
