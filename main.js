@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let days = $("#days").select2('val');
         let hours = $("#hours").select2('val');
 
-        if(title && days && hours && section) {
+        if(title && days.length>0 && hours.length>0 && section) {
             let random = Math.floor(Math.random() * (BACKGROUNDS.length));
             while(BG_USED[random]) {
                 random = Math.floor(Math.random() * (BACKGROUNDS.length));
