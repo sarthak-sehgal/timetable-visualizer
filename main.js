@@ -74,7 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let cells = document.getElementsByClassName("cell");
     let addBtn = document.getElementById("add-btn");
 
-    addBtn.addEventListener("click", function () {
+    addBtn.addEventListener("click", addBtnHandler);
+
+    function addBtnHandler () {
         document.getElementById("error").style.display = 'none';
         let title = document.getElementById("course-title").value;
         let classroom = document.getElementById("classroom").value;
@@ -90,28 +92,47 @@ document.addEventListener("DOMContentLoaded", function () {
             BG_USED[random] = 1;
 
             let arr = [];
+            let flag = 0;
 
             for(let j=0; j<hours.length; j++) {
                 for(let i=0; i<days.length; i++) {
                     let day = Number(days[i]);
                     let hour = Number(hours[j]);
                     
+                    if(cells[hour*8 + day].innerHTML !== '') {
+                        flag = 1;
+                        break;
+                    }
+                    
                     arr.push(hour*8 + day);
                     cells[hour*8 + day].innerHTML = `<strong>${title}</strong>${section}<br>${classroom}`;
                     cells[hour*8 + day].style.background = BACKGROUNDS[random] + BG_OPACITY.toString();
                 }
+                if(flag === 1)
+                    break;
             }
 
-            history.push({
-                bgColorIndex: random,
-                arr
-            });
-
-            if(!checkLunch()) {
-                undo();
-                document.getElementById("error").innerHTML = 'No lunch break!';
+            if(flag === 1) {
+                document.getElementById("error").innerHTML = 'Clash exists! Delete first!';
                 document.getElementById("error").style.display = 'flex';
+                arr.map(index => {
+                    cells[index].innerHTML = '';
+                    cells[index].style.background = '';
+                });
+                BACKGROUNDS[random] = 0;
+            } else {
+                history.push({
+                    bgColorIndex: random,
+                    arr
+                });
+    
+                if(!checkLunch()) {
+                    undo();
+                    document.getElementById("error").innerHTML = 'No lunch break!';
+                    document.getElementById("error").style.display = 'flex';
+                }
             }
+
 
             document.getElementById("course-title").value = '';
             document.getElementById("classroom").value = '';
@@ -122,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("error").innerHTML = 'One or more fields missing!';
             document.getElementById("error").style.display = 'flex';
         }
-    });
+    }
 
 
     let undoBtn = document.getElementById("undo-btn");
