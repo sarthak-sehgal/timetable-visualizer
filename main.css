@@ -173,6 +173,7 @@ html, body {
     border-radius: 5px;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .floating > img {
@@ -189,5 +190,11 @@ html, body {
 #author {
     position: fixed;
     top: 55px;
+    right: 30px;
+}
+
+#author1 {
+    position: fixed;
+    top: 90px;
     right: 30px;
 }
