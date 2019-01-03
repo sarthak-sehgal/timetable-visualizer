@@ -131,6 +131,12 @@ html, body {
     padding: 3px;
     font-size: 12px;
     flex-direction: column;
+    cursor: pointer;
+    position: relative
+}
+
+.cell:hover {
+    opacity: 0.4;
 }
 
 .highlight {

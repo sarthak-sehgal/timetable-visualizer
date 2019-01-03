@@ -107,6 +107,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 arr
             });
 
+            if(!checkLunch()) {
+                undo();
+                document.getElementById("error").innerHTML = 'No lunch break!';
+                document.getElementById("error").style.display = 'flex';
+            }
+
             document.getElementById("course-title").value = '';
             document.getElementById("classroom").value = '';
             document.getElementById("section").value = '';
@@ -120,7 +126,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     let undoBtn = document.getElementById("undo-btn");
-    undoBtn.addEventListener("click", function () {
+    undoBtn.addEventListener("click", undo);
+
+    function undo () {
         document.getElementById("error").style.display = 'none';
         if(history.length >= 1) {
             let lastMove = history[history.length - 1].arr;
@@ -135,7 +143,50 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("error").innerHTML = 'No history found!';
             document.getElementById("error").style.display = 'flex';
         }
-    });
+    }
+
+    for(let i=0; i<cells.length; i++) {
+        if(i>7 && i%8!==0) {
+            cells[i].addEventListener("click", function() {
+                document.getElementById("error").style.display = 'none';
+                let flag = 0;
+                history.map((obj, objIndex) => {
+                    obj.arr.map(index => {
+                        if(index === i) {
+                            flag = 1;
+                            BG_USED[obj.bgColorIndex] = 0;
+                            obj.arr.map(cellIndex => {
+                                cells[cellIndex].innerHTML = '';
+                                cells[cellIndex].style.background = '';
+                            });
+                            history.splice(objIndex, 1);
+                            return;
+                        }
+                    })
+                });
+                if(!flag) {
+                    document.getElementById("error").innerHTML = 'Cell is empty!';
+                    document.getElementById("error").style.display = 'flex';
+                }
+            })
+        }
+    }
+
+    function checkLunch () {
+        document.getElementById("error").style.display = 'none';
+        for(let j=1; j<8; j++) {
+            let flag = 0;
+            for(let i=4; i<=6; i++) {
+                if(cells[i*8 + j].innerHTML === '') {
+                    flag = 1;
+                }
+            }
+            if(!flag)
+                return 0;
+        }
+        return 1;
+    }
+
 });
 
 $(document).ready(function() {
