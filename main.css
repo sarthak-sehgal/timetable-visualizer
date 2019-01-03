@@ -163,3 +163,31 @@ html, body {
     left: 10px;
     bottom: 10px;
 }
+
+.floating {
+    display: flex;
+    background: #2c2c2c;
+    color: #fff;
+    padding: 5px 5px;
+    font-size: 15px;
+    border-radius: 5px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.floating > img {
+    max-height: 17px;
+    margin-right: 5px;
+}
+
+#star {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+}
+
+#author {
+    position: fixed;
+    top: 55px;
+    right: 30px;
+}
