@@ -198,3 +198,23 @@ html, body {
     top: 90px;
     right: 30px;
 }
+
+#desktopView {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+@media all and (max-width: 1000px) {
+    #container {
+        display: none;
+    }
+    #desktopView {
+        display: flex;
+    }
+}
