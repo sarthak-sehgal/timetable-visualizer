@@ -54,6 +54,7 @@ html, body {
 
 .input-box > select {
     text-align: left;
+    width: 400px;
 }
 
 .input-box > input {
@@ -211,10 +212,48 @@ html, body {
 }
 
 @media all and (max-width: 1000px) {
-    #container {
-        display: none;
+    .cell {
+        width: 100px;
+        height: 80px;
     }
-    #desktopView {
-        display: flex;
+    .input-box {
+        width: 400px;
+    }
+    .input-box > select {
+        width: 400px;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .cell {
+        width: 80px;
+        height: 70px;
+    }
+    .input-box {
+        width: 400px;
+    }
+    .input-box > select {
+        width: 400px;
+    }
+    #star, #author, #author1 {
+        position: static;
+        margin-top: 10px;
+    }
+    #star {
+        margin-top: 20px;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .cell {
+        width: 40px;
+        height: 30px;
+        font-size: 8px;
+    }
+    .input-box {
+        width: 300px;
+    }
+    .input-box > select {
+        width: 300px;
     }
 }
